@@ -1,0 +1,36 @@
+name: hnews
+version: '0.0.0.1'
+synopsis: See README for more info
+description: See README for more info
+author: Paul
+maintainer: Paul <paul.dhubert@pm.me>
+copyright: 2021 Paul
+license: MIT
+github: pauldub/hnews.git
+
+library:
+  source-dirs: src
+  exposed-modules:
+  - Hnews
+
+executables:
+  hnews:
+    main: Main.hs
+    source-dirs: app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - hnews
+tests:
+  hnews-test:
+    main: Spec.hs
+    source-dirs: test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - hnews
+tested-with: ghc ==8.8.3
