@@ -8,10 +8,19 @@ copyright: 2021 Paul
 license: MIT
 github: pauldub/hnews.git
 
+dependencies:
+  - base >=4.14.1.0
+  - text
+
 library:
   source-dirs: src
   exposed-modules:
-  - Hnews
+  - HNews
+  - HNews.Feed
+  - HNews.Feed.RSS
+  - HNews.Entry
+  dependencies:
+    - feed
 
 executables:
   hnews:
@@ -33,4 +42,4 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - hnews
-tested-with: ghc ==8.8.3
+tested-with: ghc ==8.10.5
