@@ -12,6 +12,9 @@ dependencies:
   - base >=4.14.1.0
   - text
 
+default-extensions:
+  - OverloadedStrings
+
 library:
   source-dirs: src
   exposed-modules:
@@ -42,4 +45,6 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - hnews
+    - tasty
+    - tasty-hunit
 tested-with: ghc ==8.10.5

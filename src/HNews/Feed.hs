@@ -3,7 +3,7 @@ module HNews.Feed where
 import HNews.Entry (Entry)
 
 class HasFeed a where
-  loadTitle :: a -> Maybe String
+  loadTitle :: a -> String
   entries :: a -> [Entry]
 
 data Feed

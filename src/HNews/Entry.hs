@@ -1,7 +1,9 @@
 module HNews.Entry where
 
-data Entry = Entry {
-    url :: String
-  , title :: String
-  , timestamp :: String
-}
+data Entry
+  = Entry
+      { url :: String,
+        title :: String,
+        timestamp :: String
+      }
+  deriving (Show, Eq)
