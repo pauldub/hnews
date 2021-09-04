@@ -30,7 +30,7 @@ rssFeed =
                   ]
             pure ()
           _ -> assertFailure "could not parse feed",
-      testCase "parses RSS feeds" $
+      testCase "parses RSS 2.0 feeds" $
         case RSS.parseFeedString sampleRSSFeed of
           Just rss -> do
             Feed.loadTitle rss @?= "Sample Feed - Favorite RSS Related Software & Resources"
@@ -53,7 +53,7 @@ rssFeed =
                   ]
             pure ()
           _ -> assertFailure "could not parse feed",
-      testCase "parses RSS 1 feeds" $
+      testCase "parses RSS 1.0 feeds" $
         case RSS.parseFeedString sampleRSS1Feed of
           Just rss -> do
             Feed.loadTitle rss @?= "XML.com"
