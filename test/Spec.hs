@@ -21,7 +21,13 @@ rssFeed =
         case RSS.parseFeedString sampleAtomFeed of
           Just rss -> do
             Feed.loadTitle rss @?= "Example Feed"
-            Feed.entries rss @?= [Entry "http://example.org/2003/12/13/atom03" "Atom-Powered Robots Run Amok" "2003-12-13T18:30:02Z"]
+            Feed.entries rss
+              @?= [ Entry
+                      { url = Just "http://example.org/2003/12/13/atom03",
+                        title = "Atom-Powered Robots Run Amok",
+                        timestamp = Just "2003-12-13T18:30:02Z"
+                      }
+                  ]
             pure ()
           _ -> assertFailure "could not parse feed",
       testCase "parses RSS feeds" $
@@ -29,9 +35,21 @@ rssFeed =
           Just rss -> do
             Feed.loadTitle rss @?= "Sample Feed - Favorite RSS Related Software & Resources"
             Feed.entries rss
-              @?= [ Entry {url = "http://www.feedforall.com", title = "RSS Resources", timestamp = "Tue, 26 Oct 2004 14:01:01 -0500"},
-                    Entry {url = "http://www.feedforall.com/feedforall-partners.htm", title = "Recommended Desktop Feed Reader Software", timestamp = "Tue, 26 Oct 2004 14:03:25 -0500"},
-                    Entry {url = "http://www.feedforall.com/feedforall-partners.htm", title = "Recommended Web Based Feed Reader Software", timestamp = "Tue, 26 Oct 2004 14:06:44 -0500"}
+              @?= [ Entry
+                      { url = Just "http://www.feedforall.com",
+                        title = "RSS Resources",
+                        timestamp = Just "Tue, 26 Oct 2004 14:01:01 -0500"
+                      },
+                    Entry
+                      { url = Just "http://www.feedforall.com/feedforall-partners.htm",
+                        title = "Recommended Desktop Feed Reader Software",
+                        timestamp = Just "Tue, 26 Oct 2004 14:03:25 -0500"
+                      },
+                    Entry
+                      { url = Just "http://www.feedforall.com/feedforall-partners.htm",
+                        title = "Recommended Web Based Feed Reader Software",
+                        timestamp = Just "Tue, 26 Oct 2004 14:06:44 -0500"
+                      }
                   ]
             pure ()
           _ -> assertFailure "could not parse feed",
@@ -40,8 +58,16 @@ rssFeed =
           Just rss -> do
             Feed.loadTitle rss @?= "XML.com"
             Feed.entries rss
-              @?= [ Entry {url = "http://xml.com/pub/2000/08/09/xslt/xslt.html", title = "Processing Inclusions with XSLT", timestamp = ""},
-                    Entry {url = "http://xml.com/pub/2000/08/09/rdfdb/index.html", title = "Putting RDF to Work", timestamp = ""}
+              @?= [ Entry
+                      { url = Just "http://xml.com/pub/2000/08/09/xslt/xslt.html",
+                        title = "Processing Inclusions with XSLT",
+                        timestamp = Nothing
+                      },
+                    Entry
+                      { url = Just "http://xml.com/pub/2000/08/09/rdfdb/index.html",
+                        title = "Putting RDF to Work",
+                        timestamp = Nothing
+                      }
                   ]
             pure ()
           _ -> assertFailure "could not parse feed"
