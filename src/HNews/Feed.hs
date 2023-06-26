@@ -1,20 +1,23 @@
 module HNews.Feed where
 
-import HNews.Entry (Entry)
+import Data.Text (Text)
+import Control.Monad.IO.Class
 
 class HasFeed a where
-  loadTitle :: a -> String
-  entries :: a -> [Entry]
+  type FeedEntry a :: *
+
+  loadTitle :: a -> IO Text
+  entries :: a -> IO [FeedEntry a]
 
 data Feed
   = Feed
-      { url :: String,
-        title :: String,
-        tags :: [String]
+      { url :: Text,
+        title :: Text,
+        tags :: [Text]
       }
 
 -- Loads a Feed from a URL
-loadFeed :: String -> Feed
+loadFeed :: Text -> Feed
 loadFeed url =
   Feed
     { url = url,

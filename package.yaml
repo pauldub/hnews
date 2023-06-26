@@ -8,12 +8,16 @@ copyright: 2021 Paul
 license: MIT
 github: pauldub/hnews.git
 
+language: GHC2021
+
 dependencies:
   - base >=4.14.1.0
   - text
 
 default-extensions:
   - OverloadedStrings
+  - TypeFamilies
+  - RecordWildCards
 
 library:
   source-dirs: src
@@ -21,9 +25,12 @@ library:
   - HNews
   - HNews.Feed
   - HNews.Feed.RSS
+  - HNews.Feed.GitHub
   - HNews.Entry
   dependencies:
     - feed
+    - github
+    - mtl
 
 executables:
   hnews:
@@ -47,4 +54,5 @@ tests:
     - hnews
     - tasty
     - tasty-hunit
+    - github
 tested-with: ghc ==8.10.5

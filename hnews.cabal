@@ -1,6 +1,6 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.34.4.
+-- This file has been generated from package.yaml by hpack version 0.35.2.
 --
 -- see: https://github.com/sol/hpack
 
@@ -28,6 +28,7 @@ library
       HNews
       HNews.Feed
       HNews.Feed.RSS
+      HNews.Feed.GitHub
       HNews.Entry
   other-modules:
       Paths_hnews
@@ -35,11 +36,15 @@ library
       src
   default-extensions:
       OverloadedStrings
+      TypeFamilies
+      RecordWildCards
   build-depends:
       base >=4.14.1.0
     , feed
+    , github
+    , mtl
     , text
-  default-language: Haskell2010
+  default-language: GHC2021
 
 executable hnews
   main-is: Main.hs
@@ -49,27 +54,33 @@ executable hnews
       app
   default-extensions:
       OverloadedStrings
+      TypeFamilies
+      RecordWildCards
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.14.1.0
     , hnews
     , text
-  default-language: Haskell2010
+  default-language: GHC2021
 
 test-suite hnews-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      HNews.Feed.GitHubSpec
       Paths_hnews
   hs-source-dirs:
       test
   default-extensions:
       OverloadedStrings
+      TypeFamilies
+      RecordWildCards
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.14.1.0
+    , github
     , hnews
     , tasty
     , tasty-hunit
     , text
-  default-language: Haskell2010
+  default-language: GHC2021

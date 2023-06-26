@@ -4,6 +4,7 @@ import HNews.Entry (Entry (..))
 import qualified HNews.Entry as Entry
 import qualified HNews.Feed as Feed
 import qualified HNews.Feed.RSS as RSS
+import qualified HNews.Feed.GitHubSpec as GitHubSpec
 import Test.Tasty
 import Test.Tasty.HUnit
 
@@ -11,7 +12,7 @@ main :: IO ()
 main = defaultMain tests
 
 tests :: TestTree
-tests = testGroup "Tests" [rssFeed]
+tests = testGroup "Tests" [rssFeed, GitHubSpec.tests]
 
 rssFeed :: TestTree
 rssFeed =
@@ -20,9 +21,11 @@ rssFeed =
     [ testCase "parses atom feeds" $
         case RSS.parseFeedString sampleAtomFeed of
           Just rss -> do
-            Feed.loadTitle rss @?= "Example Feed"
-            Feed.entries rss
-              @?= [ Entry
+            title <- Feed.loadTitle rss
+            title @?= "Example Feed"
+
+            entries <- Feed.entries rss
+            entries @?= [ Entry
                       { url = Just "http://example.org/2003/12/13/atom03",
                         title = "Atom-Powered Robots Run Amok",
                         timestamp = Just "2003-12-13T18:30:02Z"
@@ -33,9 +36,11 @@ rssFeed =
       testCase "parses RSS 2.0 feeds" $
         case RSS.parseFeedString sampleRSSFeed of
           Just rss -> do
-            Feed.loadTitle rss @?= "Sample Feed - Favorite RSS Related Software & Resources"
-            Feed.entries rss
-              @?= [ Entry
+            title <- Feed.loadTitle rss
+            title @?= "Sample Feed - Favorite RSS Related Software & Resources"
+
+            entries <- Feed.entries rss
+            entries @?= [ Entry
                       { url = Just "http://www.feedforall.com",
                         title = "RSS Resources",
                         timestamp = Just "Tue, 26 Oct 2004 14:01:01 -0500"
@@ -56,9 +61,10 @@ rssFeed =
       testCase "parses RSS 1.0 feeds" $
         case RSS.parseFeedString sampleRSS1Feed of
           Just rss -> do
-            Feed.loadTitle rss @?= "XML.com"
-            Feed.entries rss
-              @?= [ Entry
+            title <- Feed.loadTitle rss
+            title @?= "XML.com"
+            entries <- Feed.entries rss
+            entries @?= [ Entry
                       { url = Just "http://xml.com/pub/2000/08/09/xslt/xslt.html",
                         title = "Processing Inclusions with XSLT",
                         timestamp = Nothing
