@@ -18,6 +18,7 @@ default-extensions:
   - OverloadedStrings
   - TypeFamilies
   - RecordWildCards
+  - OverloadedRecordDot
 
 library:
   source-dirs: src

@@ -38,6 +38,7 @@ library
       OverloadedStrings
       TypeFamilies
       RecordWildCards
+      OverloadedRecordDot
   build-depends:
       base >=4.14.1.0
     , feed
@@ -56,6 +57,7 @@ executable hnews
       OverloadedStrings
       TypeFamilies
       RecordWildCards
+      OverloadedRecordDot
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.14.1.0
@@ -75,6 +77,7 @@ test-suite hnews-test
       OverloadedStrings
       TypeFamilies
       RecordWildCards
+      OverloadedRecordDot
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.14.1.0

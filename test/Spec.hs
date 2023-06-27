@@ -24,7 +24,7 @@ rssFeed =
             title <- Feed.loadTitle rss
             title @?= "Example Feed"
 
-            entries <- Feed.entries rss
+            entries <- Feed.entries rss (Feed.EntriesParams 10)
             entries @?= [ Entry
                       { url = Just "http://example.org/2003/12/13/atom03",
                         title = "Atom-Powered Robots Run Amok",
@@ -39,7 +39,7 @@ rssFeed =
             title <- Feed.loadTitle rss
             title @?= "Sample Feed - Favorite RSS Related Software & Resources"
 
-            entries <- Feed.entries rss
+            entries <- Feed.entries rss (Feed.EntriesParams 10)
             entries @?= [ Entry
                       { url = Just "http://www.feedforall.com",
                         title = "RSS Resources",
@@ -63,7 +63,7 @@ rssFeed =
           Just rss -> do
             title <- Feed.loadTitle rss
             title @?= "XML.com"
-            entries <- Feed.entries rss
+            entries <- Feed.entries rss (Feed.EntriesParams 10)
             entries @?= [ Entry
                       { url = Just "http://xml.com/pub/2000/08/09/xslt/xslt.html",
                         title = "Processing Inclusions with XSLT",

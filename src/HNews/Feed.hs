@@ -3,11 +3,14 @@ module HNews.Feed where
 import Data.Text (Text)
 import Control.Monad.IO.Class
 
+data EntriesParams = EntriesParams
+  { limit :: Integer }
+
 class HasFeed a where
   type FeedEntry a :: *
 
   loadTitle :: a -> IO Text
-  entries :: a -> IO [FeedEntry a]
+  entries :: a -> EntriesParams -> IO [FeedEntry a]
 
 data Feed
   = Feed

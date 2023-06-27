@@ -6,7 +6,7 @@ import Data.Maybe (mapMaybe)
 import Data.Text (Text)
 import qualified Data.Text as Text
 import HNews.Entry (Entry (..))
-import HNews.Feed (HasFeed, FeedEntry, entries, loadTitle)
+import HNews.Feed (HasFeed, FeedEntry, EntriesParams(..), entries, loadTitle)
 import qualified Text.Atom.Feed as Atom
 import Text.Feed.Import as Import
 import Text.Feed.Query (feedItems, getFeedTitle)
@@ -21,7 +21,7 @@ instance HasFeed RSS where
   type FeedEntry RSS = Entry
 
   loadTitle (RSS feed) = pure $ getFeedTitle feed
-  entries (RSS feed) = pure $ mapMaybe toEntry (feedItems feed)
+  entries (RSS feed) (EntriesParams { limit }) = pure $ take (fromInteger limit) $ mapMaybe toEntry (feedItems feed)
     where
       toEntry (AtomItem item) = atomItemToEntry item
       toEntry (RSSItem item) = rssItemToEntry item
